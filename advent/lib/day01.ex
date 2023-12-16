@@ -49,6 +49,7 @@ defmodule Advent.Day01.Part2 do
     "eight" => 8,
     "nine" => 9
   }
+  @matching Regex.compile!("(?=(" <> @digit <> "|" <> Enum.join(Map.keys(@mapping), "|") <> "))")
 
   def solution(path) do
     path
@@ -73,7 +74,7 @@ defmodule Advent.Day01.Part2 do
 
   @spec words_to_digits(String.t()) :: String.t()
   def words_to_digits(line) do
-    Regex.scan(Regex.compile!("(?=(" <> @digit <> "|" <> Enum.join(Map.keys(@mapping), "|") <> "))"), line, capture: :all_but_first)
+    Regex.scan(@matching, line, capture: :all_but_first)
     |> List.flatten()
     |> Enum.map(&number_to_digit/1)
     |> Enum.join()
