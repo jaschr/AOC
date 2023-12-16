@@ -6,9 +6,13 @@ defmodule Advent.Day02.Part1 do
   """
   use Advent
 
+  @bag %{red: 12, green: 13, blue: 14}
+
   def solution(path) do
     path
     |> read_lines()
+    |> Enum.map(&String.trim/1)
+
   end
 end
 
