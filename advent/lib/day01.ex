@@ -9,12 +9,12 @@ defmodule Advent.Day01.Part1 do
   def solution(path) do
     path
     |> read_lines()
-    |> Enum.map(&calibration_value/1)
+    |> Enum.map(&recalibrate/1)
     |> Enum.sum()
   end
 
-  @spec calibration_value(String.t()) :: integer()
-  def calibration_value(line) do
+  @spec recalibrate(String.t()) :: integer()
+  def recalibrate(line) do
     line
     |> String.trim()
     |> String.replace(~r/[^\d]/, "", global: true)
@@ -54,12 +54,12 @@ defmodule Advent.Day01.Part2 do
   def solution(path) do
     path
     |> read_lines()
-    |> Enum.map(&calibration_value/1)
+    |> Enum.map(&recalibrate/1)
     |> Enum.sum()
   end
 
-  @spec calibration_value(String.t()) :: integer()
-  def calibration_value(line) do
+  @spec recalibrate(String.t()) :: integer()
+  def recalibrate(line) do
     line
     |> String.trim()
     |> words_to_digits()
@@ -72,7 +72,6 @@ defmodule Advent.Day01.Part2 do
     "#{String.first(line)}#{String.last(line)}"
   end
 
-  @spec words_to_digits(String.t()) :: String.t()
   def words_to_digits(line) do
     Regex.scan(@matching, line, capture: :all_but_first)
     |> List.flatten()
@@ -80,7 +79,6 @@ defmodule Advent.Day01.Part2 do
     |> Enum.join()
   end
 
-  @spec number_to_digit(integer()) :: integer()
   def number_to_digit(number) do
     Map.get(@mapping, number, number)
   end
