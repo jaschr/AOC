@@ -1,10 +1,11 @@
 defmodule Advent do
   @moduledoc """
-  # Documentation for 'Advent'.
+  # Documentation for `Advent`.
 
   This file provides basic helper functions for the Advent of Code 2023.
 
-  Each day should 'use AOC' and implement the 'solution/1' callback.
+  Each day should `use Advent` and implement the `solution/1` callback.
+
   """
 
   @type path :: String.t()

@@ -1,6 +1,6 @@
 defmodule Advent.Day01.Part1 do
   @moduledoc """
-  # Documentation for 'Advent.Day01.Part1'.
+  # Documentation for `Advent.Day01.Part1`.
 
   Solution for *Day 01 Part 1*.
   """
@@ -30,7 +30,7 @@ end
 
 defmodule Advent.Day01.Part2 do
   @moduledoc """
-  # Documentation for 'Advent.Day01.Part2'.
+  # Documentation for `Advent.Day01.Part2`.
 
   Solution for *Day 01 Part 2*.
   """
