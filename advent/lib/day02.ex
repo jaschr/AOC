@@ -10,7 +10,6 @@ defmodule Advent.Day02.Part1 do
     path
     |> read_lines()
   end
-
 end
 
 defmodule Advent.Day02.Part2 do
@@ -25,5 +24,4 @@ defmodule Advent.Day02.Part2 do
     path
     |> read_lines()
   end
-
 end
