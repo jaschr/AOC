@@ -23,11 +23,28 @@ defmodule Advent do
   """
   @callback solution(path()) :: any()
 
+  @spec eval_day(integer()) :: String.t()
+  def eval_day(day) do
+    if day < 10 do
+      day
+      |> Integer.to_string()
+      |> String.pad_leading(2, "0")
+    else
+      day
+      |> Integer.to_string()
+    end
+  end
+
   @doc """
   Returns the input for any given day as a list of strings.
   """
-  @spec read_lines(path()) :: list(String.t())
-  def read_lines(filename) do
+  @spec read_lines(integer()) :: list(String.t())
+  def read_lines(day) do
+    day_string =
+      day
+      |> eval_day()
+
+    filename = "inputs/day" <> day_string <> ".txt"
     filename
     |> File.stream!()
     |> Enum.to_list()
