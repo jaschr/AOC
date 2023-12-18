@@ -8,8 +8,8 @@ defmodule Advent.Day02.Part1 do
 
   @bag %{"red" => 12, "green" => 13, "blue" => 14}
 
-  def solution(path) do
-    path
+  def solution(day) do
+    day
     |> read_lines()
     |> Enum.map(&parse_games/1)
     |> Enum.map(fn {id, draw} ->
@@ -22,7 +22,7 @@ defmodule Advent.Day02.Part1 do
     |> Enum.sum()
   end
 
-  @spec parse_games(String.t()) :: {integer(), String.t()}
+  @spec parse_games(binary()) :: {binary(), [any()]}
   defp parse_games(line) do
     ["Game " <> id, draws] = String.split(line, ":")
     draw =
@@ -32,7 +32,7 @@ defmodule Advent.Day02.Part1 do
       {id, draw}
   end
 
-  @spec parse_draws(String.t()) :: String.t()
+  @spec parse_draws(String.t()) :: map()
   defp parse_draws(draw) do
     draw
     |> String.split(",")
@@ -46,7 +46,7 @@ defmodule Advent.Day02.Part1 do
     {colour, String.to_integer(count)}
   end
 
-  @spec invalid_game?(String.t(), String.t()) :: boolean()
+  @spec invalid_game?(any(), String.t()) :: boolean()
   defp invalid_game?(bag, game) do
     Enum.any?(game, fn {key, value} ->
       case Map.fetch(bag, key) do
