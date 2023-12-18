@@ -8,20 +8,20 @@ defmodule Advent do
 
   """
 
-  @type path :: String.t()
+  @type day :: integer()
 
   defmacro __using__(_opts) do
     quote do
       import Advent
       @behaviour Advent
-      @type path :: String.t()
+      @type day :: integer()
     end
   end
 
   @doc """
   Returns the solution for a puzzle.
   """
-  @callback solution(path()) :: any()
+  @callback solution(day()) :: any()
 
   @spec eval_day(integer()) :: String.t()
   def eval_day(day) do
