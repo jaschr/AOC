@@ -14,7 +14,7 @@ defmodule Advent.Day01.Part1 do
   end
 
   @spec recalibrate(String.t()) :: integer()
-  def recalibrate(line) do
+  defp recalibrate(line) do
     line
     |> String.trim()
     |> String.replace(~r/[^\d]/, "", global: true)
@@ -23,7 +23,7 @@ defmodule Advent.Day01.Part1 do
   end
 
   @spec first_and_last(String.t()) :: String.t()
-  def first_and_last(line) do
+  defp first_and_last(line) do
     "#{String.first(line)}#{String.last(line)}"
   end
 end
@@ -59,7 +59,7 @@ defmodule Advent.Day01.Part2 do
   end
 
   @spec recalibrate(String.t()) :: integer()
-  def recalibrate(line) do
+  defp recalibrate(line) do
     line
     |> String.trim()
     |> words_to_digits()
@@ -68,18 +68,18 @@ defmodule Advent.Day01.Part2 do
   end
 
   @spec first_and_last(String.t()) :: String.t()
-  def first_and_last(line) do
+  defp first_and_last(line) do
     "#{String.first(line)}#{String.last(line)}"
   end
 
-  def words_to_digits(line) do
+  defp words_to_digits(line) do
     Regex.scan(@matching, line, capture: :all_but_first)
     |> List.flatten()
     |> Enum.map(&number_to_digit/1)
     |> Enum.join()
   end
 
-  def number_to_digit(number) do
+  defp number_to_digit(number) do
     Map.get(@mapping, number, number)
   end
 end
