@@ -22,6 +22,7 @@ defmodule Advent.Day02.Part1 do
     |> Enum.sum()
   end
 
+  @spec parse_games(String.t()) :: {integer(), String.t()}
   defp parse_games(line) do
     ["Game " <> id, draws] = String.split(line, ":")
     draw =
@@ -31,16 +32,21 @@ defmodule Advent.Day02.Part1 do
       {id, draw}
   end
 
+  @spec parse_draws(String.t()) :: String.t()
   defp parse_draws(draw) do
     draw
     |> String.split(",")
-    |> Enum.map(fn colours ->
-      [_, count, colour] = Regex.run(~r" *(\d+) (red|green|blue) *", colours)
-      {colour, String.to_integer(count)}
-    end)
+    |> Enum.map(&parse_colours/1)
     |> Map.new()
   end
 
+  @spec parse_colours(String.t()) :: {String.t(), integer()}
+  defp parse_colours(colours) do
+    [_, count, colour] = Regex.run(~r" *(\d+) (red|green|blue) *", colours)
+    {colour, String.to_integer(count)}
+  end
+
+  @spec invalid_game?(String.t(), String.t()) :: boolean()
   defp invalid_game?(bag, game) do
     Enum.any?(game, fn {key, value} ->
       case Map.fetch(bag, key) do
