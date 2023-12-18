@@ -11,42 +11,40 @@ defmodule Advent.Day02.Part1 do
   def solution(path) do
     path
     |> read_lines()
-    |> Enum.map(&parse_game/1)
-    |> Enum.map(fn {id, reach} ->
+    |> Enum.map(&parse_games/1)
+    |> Enum.map(fn {id, draw} ->
       invalid =
-        reach
+        draw
         |> Enum.map(&invalid_game?(@bag, &1))
         |> Enum.any?()
-
       if invalid, do: 0, else: String.to_integer(id)
     end)
     |> Enum.sum()
   end
 
-  defp parse_reaches(reach) do
-    reach
-    |> String.split(",")
-    |> Enum.map(fn s ->
-      [_, count, colour] = Regex.run(~r" *(\d+) (red|green|blue) *", s)
-      {colour, String.to_integer(count)}
-    end)
-    |> Map.new()
+  defp parse_games(line) do
+    ["Game " <> id, draws] = String.split(line, ":")
+    draw =
+      draws
+      |> String.split(";")
+      |> Enum.map(&parse_draws/1)
+    {id, draw}
   end
 
-  defp parse_game(line) do
-   ["Game " <> id, reaches] = String.split(line, ":")
-   reach =
-    reaches
-    |> String.split(";")
-    |> Enum.map(&parse_reaches/1)
-
-    {id, reach}
+  defp parse_draws(draw) do
+    draw
+    |> String.split(",")
+    |> Enum.map(fn colours ->
+      [_, count, colour] = Regex.run(~r" *(\d+) (red|green|blue) *", colours)
+      {colour, String.to_integer(count)}
+    end)
+    Map.new()
   end
 
   defp invalid_game?(bag, game) do
-    Enum.any?(game, fn {k, v} ->
-      case Map.fetch(bag, k) do
-        {:ok, bag_value} when bag_value >= v -> false
+    Enum.any?(game, fn {key, value} ->
+      case Map.fetch(bag, key) do
+        {:ok, bag_value} when bag_value >= value -> false
         _ -> true
       end
     end)
