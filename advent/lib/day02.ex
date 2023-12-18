@@ -28,7 +28,7 @@ defmodule Advent.Day02.Part1 do
       draws
       |> String.split(";")
       |> Enum.map(&parse_draws/1)
-    {id, draw}
+      {id, draw}
   end
 
   defp parse_draws(draw) do
@@ -38,7 +38,7 @@ defmodule Advent.Day02.Part1 do
       [_, count, colour] = Regex.run(~r" *(\d+) (red|green|blue) *", colours)
       {colour, String.to_integer(count)}
     end)
-    Map.new()
+    |> Map.new()
   end
 
   defp invalid_game?(bag, game) do
