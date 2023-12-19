@@ -6,8 +6,8 @@ defmodule Advent.Day01.Part1 do
   """
   use Advent
 
-  def solution(path) do
-    path
+  def solution(day) do
+    day
     |> read_lines()
     |> Enum.map(&recalibrate/1)
     |> Enum.sum()
