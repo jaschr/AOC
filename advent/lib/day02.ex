@@ -13,11 +13,11 @@ defmodule Advent.Day02.Part1 do
     |> read_lines()
     |> Enum.map(&parse_games/1)
     |> Enum.map(fn {id, draw} ->
-      invalid =
+      validation =
         draw
-        |> Enum.map(&invalid_game?(@bag, &1))
+        |> Enum.map(&game_validation?(@bag, &1))
         |> Enum.any?()
-      if invalid, do: 0, else: String.to_integer(id)
+      if validation, do: 0, else: String.to_integer(id)
     end)
     |> Enum.sum()
   end
@@ -46,8 +46,8 @@ defmodule Advent.Day02.Part1 do
     {colour, String.to_integer(count)}
   end
 
-  @spec invalid_game?(any(), String.t()) :: boolean()
-  defp invalid_game?(bag, game) do
+  @spec game_validation?(any(), String.t()) :: boolean()
+  defp game_validation?(bag, game) do
     Enum.any?(game, fn {key, value} ->
       case Map.fetch(bag, key) do
         {:ok, bag_value} when bag_value >= value -> false
