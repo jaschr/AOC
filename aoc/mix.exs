@@ -1,9 +1,9 @@
-defmodule Advent.MixProject do
+defmodule AOC.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :advent,
+      app: :aoc,
       version: "0.1.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
