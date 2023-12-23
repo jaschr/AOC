@@ -1,6 +1,6 @@
-defmodule AOC.Day1.Part1 do
+defmodule AOC.Day01.Part1 do
   @moduledoc """
-  Documentation for `AOC.Day1.Part1`
+  Documentation for `AOC.Day01.Part1`
 
   Solves the 2023 Advent of Code Day 1 Part 1 challenge.
   """
@@ -36,9 +36,9 @@ defmodule AOC.Day1.Part1 do
 end
 
 
-defmodule AOC.Day1.Part2 do
+defmodule AOC.Day01.Part2 do
   @moduledoc """
-  Documentation for `AOC.Day1.Part2`
+  Documentation for `AOC.Day01.Part2`
 
   Solves the 2023 Advent of Code Day 1 Part 2 challenge.
   """
@@ -46,7 +46,6 @@ defmodule AOC.Day1.Part2 do
   use AOC
 
   @nums %{
-    "zero" => 0,
     "one" => 1,
     "two" => 2,
     "three" => 3,
@@ -58,7 +57,7 @@ defmodule AOC.Day1.Part2 do
     "nine" => 9,
   }
 
-  @regex_with_words Regex.compile!("(?=(zero|one|two|three|four|five|six|seven|eight|nine|\\d))")
+  @regex_with_words Regex.compile!("(?=(one|two|three|four|five|six|seven|eight|nine|\\d))")
 
   def solve(file) do
     file
