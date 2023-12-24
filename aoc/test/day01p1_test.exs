@@ -1,4 +1,3 @@
-
 defmodule AOCDay01Part1Test do
   use ExUnit.Case
   doctest AOC.Day01.Part1
