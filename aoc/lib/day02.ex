@@ -47,5 +47,42 @@ defmodule AOC.Day02.Part1 do
   end
 
   defp max_by_colour(_round, _colour), do: raise("Not a valid colour")
-
 end
+
+defmodule AOC.Day02.Part2 do
+  @moduledoc """
+  Documentation for `AOC.Day02.Part2`
+
+  Solves the 2023 Advent of Code Day 2 Part 2 challenge.
+  """
+  use AOC
+
+  @game_id ~r/Game (?P<game_id>\d+)/
+  @matches ~r/\d+\sred|\d+\sgreen|\d+\sblue/
+  
+  def solve(file) do
+    file
+    |> read_file_to_list()
+    |> trim_newlines?()
+    |> Enum.map(fn cube ->
+      [[_whole, game_id]] = Regex.scan(@game_id, cube)
+      matches = Regex.scan(@matches, cube)
+
+      colours =
+        Enum.reduce(matches, %{}, fn [match], acc ->
+          [num, colour] = String.split(match)
+          num_int = String.to_integer(num)
+
+          Map.update(acc, colour, num_int, &Enum.max([num_int, &1]))
+        end)
+
+      {String.to_integer(game_id), colours}
+    end)
+    |> Enum.map(fn {_game_id, colours} ->
+      Map.get(colours, "red", 1) * Map.get(colours, "green", 1) * Map.get(colours, "blue", 1)
+    end)
+    |> Enum.map(fn cube -> cube end)
+    |> Enum.sum()
+  end
+end
+
